@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { tap, delay, finalize, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from 'src/app/core/service/auth.service';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -13,7 +12,6 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  faCoffee = faCoffee;
 
   error: string;
   isLoading: boolean;

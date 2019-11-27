@@ -6,9 +6,8 @@
   </div>
 </div>
 <div class="alert alert-info" role="alert">
-  Username: demo
-  <br>
-  Password: demo
+  <h6> Username: <span class="badge badge-pill badge-warning">demo</span></h6>
+  <h6>Password:  <span class="badge badge-pill badge-warning">demo</span></h6>
 </div>
 
 <div [hidden]="!error" class="alert alert-danger" role="alert">
@@ -39,8 +38,7 @@
           <button type="submit" class="btn btn-primary btn-block btn-raised" type="submit"
             [disabled]="loginForm.invalid">
             <span [hidden]="isLoading">Submit</span>
-            <app-spinner></app-spinner>
-            <fa-icon [icon]="faCoffee"></fa-icon>
+            <app-spinner [isLoading]="isLoading"></app-spinner>
             <span [hidden]="!isLoading">
             </span>
           </button>

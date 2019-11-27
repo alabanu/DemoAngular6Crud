@@ -9,10 +9,15 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" *ngFor="let item of navItems">
-          <a class="nav-link" [routerLink]="[item.link]" routerLinkActive="active"> {{ item.title }}</a>
+          <a class="nav-link" [routerLink]="[item.link]" routerLinkActive="active">
+            <fa-icon [icon]='item.icons'></fa-icon> 
+            {{ item.title }}
+          </a>
         </li>
       </ul>
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click) = "logout()">Logout</button>
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit" (click)="logout()">
+        <fa-icon [icon]="faPowerOff"></fa-icon> Logout
+      </button>
     </div>
   </nav>
 </div>

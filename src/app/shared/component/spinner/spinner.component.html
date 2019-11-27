@@ -1,3 +1,5 @@
-<div [hidden]="!isLoading" class="text-xs-center">
-  <h2> <fa-icon [icon]="faSpinner" [spin]="true"></fa-icon></h2>
+<div [hidden]="!isLoading">
+    <div class="spinner-border m-2" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
 </div>
