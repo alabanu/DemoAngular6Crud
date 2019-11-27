@@ -10,24 +10,24 @@ import { DataService } from 'src/app/core/service/data.service';
 export class TableComponent implements OnInit {
 
   @Input('users') users: User[];
- 
-  ngDoCheck(){
+
+  ngDoCheck() {
     console.log(this.data.length)
   }
 
   @Input()
-  startIndex:number;
+  startIndex: number;
 
 
   @Input()
-  endIndex:number;
-  
+  endIndex: number;
+
   @Input()
-  data:User[];
+  data: User[];
 
 
-  constructor(private dataService: DataService) { 
-    
+  constructor(private dataService: DataService) {
+
   }
 
   ngOnInit() {
@@ -35,8 +35,11 @@ export class TableComponent implements OnInit {
     console.log(this.data[0]);
   }
 
-   returnZero() {
+  returnZero() {
     return 0
-    }
- 
+  }
+
+  getKeys(obj){
+    return Object.keys(obj)
+  }
 }

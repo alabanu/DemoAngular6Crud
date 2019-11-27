@@ -8,3 +8,7 @@
 .per-page nav .pagination {
     float: right;
 }
+
+.page-link:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}

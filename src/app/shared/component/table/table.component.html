@@ -10,7 +10,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of data  |slice:startIndex:endIndex">
-        <td *ngFor="let header of item | keyvalue: returnZero">{{ header.value }}</td>
+        <td *ngFor="let header of item | keyvalue: returnZero">{{ header.value }}
+        </td>
+
       </tr>
+
     </tbody>
   </table>

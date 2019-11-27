@@ -1,10 +1,15 @@
-<!-- <app-table [users]="users"></app-table> -->
 <div class="container mt-5" *ngIf="users">
-
-  <app-table [data]="users" [startIndex]="startIndex" [endIndex]="endIndex">
-  </app-table>
-
-  <app-pagination [noOfRecords]="users.length" [noOfRecordsPerPage]="5" (UpdateIndex)="updateIndex($event)">
-  </app-pagination>
-
+  <div class="card">
+    <div class="card-header">
+      <div class="text-success">
+        <fa-icon [icon]="faUser"></fa-icon> Active Users
+      </div>
+    </div>
+    <div class="card-body">
+      <app-table [data]="users" [startIndex]="startIndex" [endIndex]="endIndex">
+      </app-table>
+      <app-pagination [noOfRecords]="users.length" [noOfRecordsPerPage]="5" (UpdateIndex)="updateIndex($event)">
+      </app-pagination>
+    </div>
+  </div>
 </div>

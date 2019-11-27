@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/model/user';
 import { DataService } from 'src/app/core/service/data.service';
 import { Observable } from 'rxjs';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class HomeComponent implements OnInit {
   user$:Observable<any>;
+  faUser = faUser;
   startIndex = 0;
   endIndex = 5;
   users: User[];

@@ -6,10 +6,7 @@ import { TableComponent } from './component/table/table.component';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { PaginationComponent } from './component/table/pagination/pagination.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee, faSpinner, } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
-library.add(faCoffee);
-library.add(faSpinner);
+
 
 @NgModule({
   imports: [

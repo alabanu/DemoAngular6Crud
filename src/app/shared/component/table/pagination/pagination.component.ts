@@ -17,11 +17,23 @@ export class PaginationComponent implements OnInit {
   @Input()
   noOfRecordsPerPage: number;
 
+  selectedIndex: number = 0;
+
   constructor() { }
-  
+
   updateIndex(index) {
-    console.log(index);
-    this.UpdateIndex.emit(index)
+    if (index > -1 && index < this.getArrayFromNumber().length) {
+      this.selectedIndex = index;
+      this.UpdateIndex.emit(index)
+    }
+  }
+
+  setNextPage() {
+      this.updateIndex(this.selectedIndex + 1);
+  }
+
+  setPreviousPage() {
+    this.updateIndex(this.selectedIndex - 1);
   }
 
   getArrayFromNumber() {
