@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th *ngFor="let header of data[0] | keyvalue: returnZero">
+          <label>{{header.key |titlecase }}
+          </label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data  |slice:startIndex:endIndex">
+        <td *ngFor="let header of item | keyvalue: returnZero">{{ header.value }}</td>
+      </tr>
+    </tbody>
+  </table>

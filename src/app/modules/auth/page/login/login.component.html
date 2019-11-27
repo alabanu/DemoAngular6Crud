@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <div class="overlay">
+    <div class="spinner-wrapper">
+      <app-spinner></app-spinner>
+    </div>
+  </div>
+</div>
+<div class="alert alert-info" role="alert">
+  Username: demo
+  <br>
+  Password: demo
+</div>
+
+<div [hidden]="!error" class="alert alert-danger" role="alert">
+  {{ error }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Please sign in</h3>
+  </div>
+  <div class="card-body">
+    <fieldset [disabled]="isLoading">
+      <form (ngSubmit)="login()" [formGroup]="loginForm">
+        <div class="form-group">
+          <label class="d-block">
+            <input type="text" class="form-control" [placeholder]="'Username'" formControlName="username">
+          </label>
+        </div>
+        <div class="form-group">
+          <label class="d-block">
+            <input type="password" class="form-control" [placeholder]="'Password'" formControlName="password">
+          </label>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block btn-raised" type="submit"
+            [disabled]="loginForm.invalid">
+            <span [hidden]="isLoading">Submit</span>
+            <app-spinner></app-spinner>
+            <fa-icon [icon]="faCoffee"></fa-icon>
+            <span [hidden]="!isLoading">
+            </span>
+          </button>
+        </div>
+      </form>
+    </fieldset>
+  </div>
+</div>
