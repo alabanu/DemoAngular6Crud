@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomeRoutingModule } from './home-routing.module';
+import { HomeRoutingModule } from './home.routing';
 import { HomeComponent } from './page/home.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { TableComponent } from 'src/app/shared/component/table/table.component';
+import { UserDetailsComponent } from './page/user-details/user-details.component';
+import { UserListComponent } from './page/user-list/user-list.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { TableComponent } from 'src/app/shared/component/table/table.component';
     HomeRoutingModule,
     SharedModule
   ],
-  declarations: [HomeComponent]
+  declarations: [HomeComponent, UserDetailsComponent, UserListComponent]
 })
 export class HomeModule { }

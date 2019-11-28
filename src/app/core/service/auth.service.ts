@@ -10,7 +10,7 @@ interface LoginContextInterface {
   token: string;
 }
 
-const defaultUser = {
+const demotUser = {
   username: 'demo',
   password: 'demo',
   token: 'password'
@@ -30,11 +30,11 @@ export class AuthService {
 
   login(loginContext: LoginContextInterface): Observable<AuthUser> {
     if (
-      loginContext.username === defaultUser.username &&
-      loginContext.password === defaultUser.password
+      loginContext.username === demotUser.username &&
+      loginContext.password === demotUser.password
     ) {
       this.loggedInSubject.next(true);
-      return of(defaultUser);
+      return of(demotUser);
     }
 
     return throwError('Invalid username or password');

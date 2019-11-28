@@ -1,0 +1,42 @@
+<!-- <div *ngIf="selectedUser">
+  <div class="row mb-2">
+    <td class="col-3"><strong>ID</strong></td>
+    <td class="col-9">{{selectedUser.id}}</td>
+  </div>
+  <div class="row mb-2">
+    <td class="col-3"><strong>Name</strong></td>
+    <td class="col-9">{{selectedUser.name}}</td>
+  </div>
+  <div class="row mb-2">
+    <td class="col-3"><strong>Username</strong></td>
+    <td class="col-9">{{selectedUser.username}}</td>
+  </div>
+  <div class="row mb-2">
+    <td class="col-3"><strong>Phone</strong></td>
+    <td class="col-9">{{selectedUser.phone}}</td>
+  </div>
+  <div class="row mb-2">
+    <td class="col-3"><strong>Website</strong></td>
+    <td class="col-9">{{selectedUser.website}}</td>
+  </div>
+  <div class="row mb-2">
+    <td class="col-3"><strong>Street</strong></td>
+    <td class="col-9">{{selectedUser.address.street}}</td>
+  </div>
+  <div class="row mb-2">
+    <td class="col-3"><strong>Suite</strong></td>
+    <td class="col-9">{{selectedUser.address.suite}}</td>
+  </div>
+  <div class="row mb-2">
+    <td class="col-3"><strong>City</strong></td>
+    <td class="col-9">{{selectedUser.address.city}}</td>
+  </div>
+  <div class="row mb-4">
+    <td class="col-3"><strong>Zip Code</strong></td>
+    <td class="col-9">{{selectedUser.address.zipcode}}</td>
+  </div>
+</div> -->
+<div *ngIf="selectedUser">
+  <app-contact-card [user]="selectedUser" [cardImage] = "cardImage"></app-contact-card>
+</div>
+<button routerLink="/dashboard/home" class="btn btn-sm btn-link">Back To List</button>

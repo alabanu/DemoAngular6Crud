@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { faMap, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/core/model/user';
+import { Address } from 'src/app/core/model/address';
 
 @Component({
   selector: 'app-contact',
@@ -7,13 +8,26 @@ import { faMap, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  faMap = faMap;
-  faEnvelope = faEnvelope;
-  faPhone = faPhone;
+  userme = new User;
+  address = new Address;
+  cardImage: string = "https://www.alloy-software.com/wp-content/uploads/2019/09/contacts-hero.svg";
 
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit() {
+    this.userme.id = 0;
+    this.userme.name ="Angeliki Alampanou";
+    this.userme.username ="alabanu";
+    this.userme.email ="alampanoua@gmail.com";
+    this.userme.phone ="6972753434";
+    this.address.street = "Georgiou Kafantari";
+    this.address.suite = "8";
+    this.address.city ="Athens";
+    this.address.zipcode ="17343";
+    this.userme.address = this.address;
+    this.userme.website ="alabanu@github";
   }
 
 }

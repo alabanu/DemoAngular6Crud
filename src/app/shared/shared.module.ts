@@ -6,6 +6,7 @@ import { TableComponent } from './component/table/table.component';
 import { SpinnerComponent } from './component/spinner/spinner.component';
 import { PaginationComponent } from './component/table/pagination/pagination.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ContactCardComponent } from './component/contact-card/contact-card.component';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     RouterModule,
     FontAwesomeModule
   ],
-  declarations: [TableComponent, SpinnerComponent, PaginationComponent],
+  declarations: [TableComponent, SpinnerComponent, PaginationComponent, ContactCardComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -25,7 +26,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     TableComponent,
     SpinnerComponent,
     PaginationComponent,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ContactCardComponent
   ]
 })
 export class SharedModule { }

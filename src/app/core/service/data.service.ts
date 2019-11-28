@@ -18,8 +18,8 @@ export class DataService {
     return this._url + "/" + id;
   }
 
-  getUser(id) {
-    return this.http.get(this.getUserUrl(id));
+  getUser(id): Observable<User>  {
+    return this.http.get<User>(this.getUserUrl(id));
   }
 
   addUser(user: User) {

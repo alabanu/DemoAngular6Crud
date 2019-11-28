@@ -2,18 +2,48 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th *ngFor="let header of data[0] | keyvalue: returnZero">
+        <th *ngFor="let option of actions">
+          <label>
+          </label>
+        </th>
+        <!-- <th class="text-secondary" *ngFor="let header of data[0] | keyvalue: returnZero">
           <label>{{header.key |titlecase }}
+          </label>
+        </th> -->
+        <th class="text-secondary" *ngFor="let header of headers">
+          <label>{{header.title |titlecase }}
           </label>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of data  |slice:startIndex:endIndex">
-        <td *ngFor="let header of item | keyvalue: returnZero">{{ header.value }}
+        <td>
+          <label class="text-primary">
+            <fa-icon [icon]='faEdit'></fa-icon>
+          </label>
         </td>
-
+        <td>
+          <label class="text-danger">
+            <fa-icon [icon]='faTrash'></fa-icon>
+          </label>
+        </td>
+        <!-- <td *ngFor="let header of item | keyvalue: returnZero">{{ header.value }}
+        </td> -->
+        <th scope="row">{{ item.id }}</th>
+        <td><a routerLink="{{ item.id }}/detail">{{item.name}}</a></td>
+        <td>{{ item.username }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.address.street }}</td>
+        <td>{{ item.address.suite }}</td>
+        <td>{{ item.address.city }}</td>
+        <td>{{ item.address.zipcode }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.website }}</td>
       </tr>
-
     </tbody>
   </table>
+
+  <app-pagination *ngIf="users" [noOfRecords]="users.length" [noOfRecordsPerPage]="5"
+    (UpdateIndex)="updateIndex($event)">
+  </app-pagination>

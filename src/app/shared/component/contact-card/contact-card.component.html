@@ -1,0 +1,77 @@
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card text-center">
+        <img class="card-img-top mt-5" [src]="cardImage" [alt]="imageAlt">
+        <div class="card-body">
+          <h5 class="card-title">Contact Info</h5>
+          <div class="container">
+              <div *ngIf="user">
+                <div class="row" *ngIf="user.id>0">
+                  <td class="col-6"><strong>ID</strong></td>
+                  <td class="col-6">{{user.id}}</td>
+                </div>
+                <div class="row">
+                  <td class="col-6"><strong>Name</strong></td>
+                  <td class="col-6">{{user.name}}</td>
+                </div>
+                <div class="row">
+                  <td class="col-6"><strong>Username</strong></td>
+                  <td class="col-6">{{user.username}}</td>
+                </div>
+                <div class="row">
+                  <td class="col-6"><strong>Website</strong></td>
+                  <td class="col-6">{{user.website}}</td>
+                </div>
+                <div class="row">
+                  <td class="col-6"><strong>Street</strong></td>
+                  <td class="col-6">{{user.address.street}}</td>
+                </div>
+                <div class="row">
+                  <td class="col-6"><strong>Suite</strong></td>
+                  <td class="col-6">{{user.address.suite}}</td>
+                </div>
+                <div class="row">
+                  <td class="col-6"><strong>City</strong></td>
+                  <td class="col-6">{{user.address.city}}</td>
+                </div>
+                <div class="row">
+                  <td class="col-6"><strong>Zip Code</strong></td>
+                  <td class="col-6">{{user.address.zipcode}}</td>
+                </div>
+
+              </div>
+            </div>
+          <hr>
+          <div class="collapse" id="collapseMap">
+            <div class="card card-body">
+              <!-- <iframe
+                src="https://maps.google.com/maps?q=georgiou%20kafantari%208%20agios%20dimitrios&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div> -->
+            </div>
+          </div>
+          <div class="card-footer text-muted">
+            
+            <div class="row" *ngIf="user">
+              <div class="col">
+                <a data-toggle="collapse" href="#collapseMap" role="button" aria-expanded="false"
+                  aria-controls="collapseMap">
+                  <fa-icon [icon]="faMap"></fa-icon>
+                </a>
+              </div>
+              <div class="col">
+                <a [href]="'mailto:' + user.email">
+                  <fa-icon [icon]="faEnvelope"></fa-icon>
+                </a>
+              </div>
+              <div class="col">
+                <a [href]="'tel:' + user.phone">
+                  <fa-icon [icon]="faPhone"></fa-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,9 +1,9 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" (click)="setPreviousPage()" [routerLink]= "">Previous</a></li>
+    <li class="page-item"><a class="page-link" (click)="setPreviousPage()" >Previous</a></li>
     <li *ngFor="let i of getArrayFromNumber();" class="page-item" [class.active]="selectedIndex === i" >
       <a class="page-link" (click)="updateIndex(i)">{{i+1}}</a>
     </li>
-    <li class="page-item"><a class="page-link" (click)="setNextPage()" [routerLink]= "">Next</a></li>
+    <li class="page-item"><a class="page-link" (click)="setNextPage()" >Next</a></li>
   </ul>
 </nav>
