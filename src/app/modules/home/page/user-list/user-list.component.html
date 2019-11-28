@@ -6,10 +6,14 @@
   </div>
   <div class="card-body">
     <div *ngIf="users">
-      <app-table [data]="users" [startIndex]="startIndex" [endIndex]="endIndex">
-      </app-table>
-      <app-pagination [noOfRecords]="users.length" [noOfRecordsPerPage]="5" (UpdateIndex)="updateIndex($event)">
-      </app-pagination>
+      <div>
+        <app-pagination [noOfRecords]="users.length" [noOfRecordsPerPage]="5" (UpdateIndex)="updateIndex($event)">
+        </app-pagination>
+      </div>
+      <div>
+        <app-table [data]="users" [startIndex]="startIndex" [endIndex]="endIndex">
+        </app-table>
+      </div>
     </div>
   </div>
 </div>

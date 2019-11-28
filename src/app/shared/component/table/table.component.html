@@ -1,49 +1,91 @@
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th *ngFor="let option of actions">
-          <label>
-          </label>
-        </th>
-        <!-- <th class="text-secondary" *ngFor="let header of data[0] | keyvalue: returnZero">
-          <label>{{header.key |titlecase }}
-          </label>
-        </th> -->
-        <th class="text-secondary" *ngFor="let header of headers">
-          <label>{{header.title |titlecase }}
-          </label>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of data  |slice:startIndex:endIndex">
-        <td>
-          <label class="text-primary">
-            <fa-icon [icon]='faEdit'></fa-icon>
-          </label>
-        </td>
-        <td>
-          <label class="text-danger">
-            <fa-icon [icon]='faTrash'></fa-icon>
-          </label>
-        </td>
-        <!-- <td *ngFor="let header of item | keyvalue: returnZero">{{ header.value }}
-        </td> -->
-        <th scope="row">{{ item.id }}</th>
-        <td><a routerLink="{{ item.id }}/detail">{{item.name}}</a></td>
-        <td>{{ item.username }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.address.street }}</td>
-        <td>{{ item.address.suite }}</td>
-        <td>{{ item.address.city }}</td>
-        <td>{{ item.address.zipcode }}</td>
-        <td>{{ item.phone }}</td>
-        <td>{{ item.website }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="row">
+  <div class="table-responsive">
+    <form [formGroup]="usersForm" *ngIf="usersForm">
 
-  <app-pagination *ngIf="users" [noOfRecords]="users.length" [noOfRecordsPerPage]="5"
-    (UpdateIndex)="updateIndex($event)">
-  </app-pagination>
+      <table class="table table-striped" #myTable>
+        <thead>
+          <tr>
+            <th *ngFor="let option of actions">
+              <label>
+              </label>
+            </th>
+            <th class="text-secondary" *ngFor="let header of headers">
+              <label>{{header.title |titlecase }}
+              </label>
+            </th>
+          </tr>
+        </thead>
+        <tbody formArrayName="usersDetails">
+          <tr *ngFor="let item of data  |slice:startIndex:endIndex; let i=index;" [formGroupName]="i">
+            <td *ngIf="item.id !== rowId">
+              <button type="button" class="btn btn-outline-primary" (click)="editRow(item.id)">
+                <fa-icon [icon]='faPencilAlt'></fa-icon>
+              </button>
+            </td>
+            <div class="row" *ngIf="item.id === rowId">
+              <td *ngIf="item.id === rowId" class="col-xs-8 col-md-10">
+                <button type="button" class="btn btn-outline-success centerbtn" (click)="saveRow(item.id)">
+                  <fa-icon [icon]='faSave'></fa-icon>
+                </button>
+              </td>
+              <td *ngIf="item.id === rowId" class="col-xs-8 col-md-10">
+                <button type="button" class="btn btn-link centerbtn" (click)="cancelRow(item.id)">
+                  <fa-icon [icon]='faTimes'></fa-icon>
+                </button>
+              </td>
+            </div>
+            <td>
+              <button type="button" class="btn btn-outline-danger" (click)="removeRow(item.id)">
+                <fa-icon [icon]='faTrash'></fa-icon>
+              </button>
+            </td>
+            <th scope="row">{{ item.id }}</th>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" formControlName="name" placeholder="Name"></td>
+            <td *ngIf="item.id !== rowId">
+              <a routerLink="{{ item.id }}/detail">
+                <button type="button" class="btn btn-outline-secondary">{{item.name}}</button>
+              </a></td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" formControlName="username">
+            </td>
+            <td *ngIf="item.id !== rowId">{{ item.username }}</td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" placeholder="Email" formControlName="email"></td>
+            <td *ngIf="item.id !== rowId">{{ item.email }}</td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" placeholder="Street" formControlName="street"></td>
+            <td *ngIf="item.id !== rowId">{{ item.address.street }}</td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" placeholder="Suite" formControlName="suite"></td>
+            <td *ngIf="item.id !== rowId">{{ item.address.suite }}</td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" placeholder="City" formControlName="city"></td>
+            <td *ngIf="item.id !== rowId">{{ item.address.city }}</td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" placeholder="Zipcode" formControlName="zipcode"></td>
+            <td *ngIf="item.id !== rowId">{{ item.address.zipcode }}</td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" placeholder="Phone" formControlName="phone"></td>
+            <td *ngIf="item.id !== rowId">{{ item.phone }}</td>
+            <td *ngIf="item.id === rowId">
+              <input type="text" class="form-input" placeholder="Website" formControlName="website"></td>
+            <td *ngIf="item.id !== rowId">{{ item.website }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
+
+  </div>
+</div>
+<!-- <div class="row">
+  <h6>Pages</h6>
+  <div *ngIf="users">
+    <app-pagination  [noOfRecords]="users.length" [noOfRecordsPerPage]="5"
+      (UpdateIndex)="updateIndex($event)">
+    </app-pagination>
+  </div>
+</div> -->
+<div class="mt-3">
+  <button type="button" class="btn btn-primary btn-lg btn-block">Add user</button>
+</div>

@@ -5,6 +5,7 @@
         <img class="card-img-top mt-5" [src]="cardImage" [alt]="imageAlt">
         <div class="card-body">
           <h5 class="card-title">Contact Info</h5>
+          <hr>
           <div class="container">
               <div *ngIf="user">
                 <div class="row" *ngIf="user.id>0">
@@ -42,7 +43,7 @@
 
               </div>
             </div>
-          <hr>
+          <br>
           <div class="collapse" id="collapseMap">
             <div class="card card-body">
               <!-- <iframe

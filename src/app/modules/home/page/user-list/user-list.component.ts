@@ -32,8 +32,6 @@ export class UserListComponent implements OnInit {
   }
 
   updateIndex(pageIndex){
-    console.log(pageIndex);
-
     this.startIndex = pageIndex * 5;
     this.endIndex = this.startIndex + 5
   }

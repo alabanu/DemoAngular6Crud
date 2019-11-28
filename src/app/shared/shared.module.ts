@@ -7,6 +7,7 @@ import { SpinnerComponent } from './component/spinner/spinner.component';
 import { PaginationComponent } from './component/table/pagination/pagination.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ContactCardComponent } from './component/contact-card/contact-card.component';
+import { MessageModalComponent } from './component/message-modal/message-modal.component';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { ContactCardComponent } from './component/contact-card/contact-card.comp
     RouterModule,
     FontAwesomeModule
   ],
-  declarations: [TableComponent, SpinnerComponent, PaginationComponent, ContactCardComponent],
+  declarations: [TableComponent, SpinnerComponent, PaginationComponent, ContactCardComponent, MessageModalComponent],
   exports: [
     CommonModule,
     FormsModule,
@@ -27,7 +28,8 @@ import { ContactCardComponent } from './component/contact-card/contact-card.comp
     SpinnerComponent,
     PaginationComponent,
     FontAwesomeModule,
-    ContactCardComponent
+    ContactCardComponent,
+    MessageModalComponent
   ]
 })
 export class SharedModule { }

@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'src/app/core/model/user';
 import { DataService } from 'src/app/core/service/data.service';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-table',
@@ -9,11 +11,14 @@ import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  faEdit = faEdit;
+  faPencilAlt = faPencilAlt;
   faTrash = faTrash;
+  faSave = faSave;
+  faTimes = faTimes;
+  usersForm: FormGroup;
 
   actions = [
-    { icon: faEdit, title: 'Edit' },
+    { icon: faPencilAlt, title: 'Edit' },
     { icon: faTrash, title: 'Delete' }
   ];
 
@@ -33,7 +38,7 @@ export class TableComponent implements OnInit {
   @Input('users') users: User[];
 
   ngDoCheck() {
-    console.log(this.data.length)
+    // console.log(this.data.length)
   }
 
   @Input()
@@ -45,21 +50,75 @@ export class TableComponent implements OnInit {
   @Input()
   data: User[];
 
+  deletedUser: any;
+  rowId: any = '';
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private fb: FormBuilder) {
 
   }
 
   ngOnInit() {
     console.log(this.data);
     console.log(this.data[0]);
+    this.usersForm = this.fb.group({
+      usersDetails: this.fb.array([])
+    })
+
+    this.createFormArray();
   }
 
-  returnZero() {
-    return 0
+  initUserRow(id: number): FormGroup {
+    return this.fb.group({
+      id: [id],
+      name: [this.data[id].name, Validators.required],
+      username: [this.data[id].username, Validators.required],
+      email: [this.data[id].email, Validators.required],
+      street: [this.data[id].address.street, Validators.required],
+      suite: [this.data[id].address.suite, Validators.required],
+      city: [this.data[id].address.city, Validators.required],
+      zipcode: [this.data[id].address.zipcode, Validators.required],
+      phone: [this.data[id].phone, Validators.required],
+      website: [this.data[id].website, Validators.required],
+    });
   }
 
-  getKeys(obj) {
-    return Object.keys(obj)
+  createFormArray() {
+    const control: FormArray = this.usersForm.get(`usersDetails`) as FormArray;
+    for (let i = 0; i < this.data.length; i++) {
+      control.push(this.initUserRow(i));
+    }
   }
+
+
+  editRow(rowId: number) {
+    this.rowId = rowId;
+
+  }
+
+  cancelRow(id) {
+    this.rowId = "";
+  }
+
+  // addUserRow(rowId: number) {
+  //   const usersArray =
+  //     <FormArray>this.usersForm.controls['usersDetails'];
+  //   usersArray.push(this.initUserRow(rowId));
+  // }
+
+  removeRow(rowId: number) {
+    const usersArray = <FormArray>this.usersForm.controls['usersDetails'];
+    if (usersArray.length > 0) {
+      this.dataService.deleteUser(rowId).subscribe(
+        (res) => {
+          const index = this.data.findIndex(user => user.id === rowId);
+          this.data.splice(index, 1);
+        },
+        (error: any) => console.error(error)
+      );
+    }
+
+  }
+
+
+
 }

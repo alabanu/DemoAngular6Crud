@@ -31,6 +31,7 @@ export class DataService {
   }
 
   deleteUser(userId) {
+    console.log("URL:"+this.getUserUrl(userId));
     return this.http.delete(this.getUserUrl(userId));
   }
 
