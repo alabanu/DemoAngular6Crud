@@ -22,6 +22,7 @@ export class PaginationComponent implements OnInit {
   constructor() { }
 
   updateIndex(index) {
+    console.log("ININ//" + index);
     if (index > -1 && index < this.getArrayFromNumber().length) {
       this.selectedIndex = index;
       this.UpdateIndex.emit(index)
@@ -29,7 +30,7 @@ export class PaginationComponent implements OnInit {
   }
 
   setNextPage() {
-      this.updateIndex(this.selectedIndex + 1);
+    this.updateIndex(this.selectedIndex + 1);
   }
 
   setPreviousPage() {
@@ -37,7 +38,7 @@ export class PaginationComponent implements OnInit {
   }
 
   getArrayFromNumber() {
-    return Array.apply(null, { length: (this.noOfRecords / this.noOfRecordsPerPage) }).
+    return Array.apply(null, { length: (this.noOfRecords / this.noOfRecordsPerPage) + 1 }).
       map(Number.call, Number)
   }
 

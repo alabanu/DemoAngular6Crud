@@ -7,7 +7,7 @@
   <div class="card-body">
     <div *ngIf="users">
       <div>
-        <app-pagination [noOfRecords]="users.length" [noOfRecordsPerPage]="5" (UpdateIndex)="updateIndex($event)">
+        <app-pagination [noOfRecords]="users.length" [noOfRecordsPerPage]="4" (UpdateIndex)="updateIndex($event)">
         </app-pagination>
       </div>
       <div>

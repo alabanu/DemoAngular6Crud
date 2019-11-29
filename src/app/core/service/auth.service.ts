@@ -3,13 +3,6 @@ import { of, Observable, throwError, BehaviorSubject } from 'rxjs';
 import { AuthUser } from '../model/auth_user';
 import { HttpClient } from '@angular/common/http';
 
-
-interface LoginContextInterface {
-  username: string;
-  password: string;
-  token: string;
-}
-
 const demotUser = {
   username: 'demo',
   password: 'demo',
@@ -20,19 +13,15 @@ const demotUser = {
   providedIn: 'root'
 })
 export class AuthService {
-  token: string;
-  private redirectUrl: string = '/';
+  private redirectUrl: string;
   private loggedInSubject: BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient) {
     this.loggedInSubject = new BehaviorSubject<boolean>(false);
   }
 
-  login(loginContext: LoginContextInterface): Observable<AuthUser> {
-    if (
-      loginContext.username === demotUser.username &&
-      loginContext.password === demotUser.password
-    ) {
+  login(user: AuthUser): Observable<AuthUser> {
+    if (user.username === demotUser.username && user.password === demotUser.password) {
       this.loggedInSubject.next(true);
       return of(demotUser);
     }

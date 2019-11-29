@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { User } from 'src/app/core/model/user';
 import { DataService } from 'src/app/core/service/data.service';
-import { faPencilAlt, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
+import { faPencilAlt, faTrash, faSave, faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { findIndex } from 'lodash';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -15,7 +16,12 @@ export class TableComponent implements OnInit {
   faTrash = faTrash;
   faSave = faSave;
   faTimes = faTimes;
+  faPlus = faPlus;
   usersForm: FormGroup;
+  submitted = false;
+  showModal: boolean;
+  showAddform: boolean;
+  subscription: Subscription;
 
   actions = [
     { icon: faPencilAlt, title: 'Edit' },
@@ -38,7 +44,6 @@ export class TableComponent implements OnInit {
   @Input('users') users: User[];
 
   ngDoCheck() {
-    // console.log(this.data.length)
   }
 
   @Input()
@@ -51,15 +56,14 @@ export class TableComponent implements OnInit {
   data: User[];
 
   deletedUser: any;
+  updatedUser: User;
   rowId: any = '';
 
-  constructor(private dataService: DataService, private fb: FormBuilder) {
 
+  constructor(private dataService: DataService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
-    console.log(this.data);
-    console.log(this.data[0]);
     this.usersForm = this.fb.group({
       usersDetails: this.fb.array([])
     })
@@ -69,16 +73,16 @@ export class TableComponent implements OnInit {
 
   initUserRow(id: number): FormGroup {
     return this.fb.group({
-      id: [id],
+      id: [this.data[id].id],
       name: [this.data[id].name, Validators.required],
       username: [this.data[id].username, Validators.required],
       email: [this.data[id].email, Validators.required],
-      street: [this.data[id].address.street, Validators.required],
-      suite: [this.data[id].address.suite, Validators.required],
-      city: [this.data[id].address.city, Validators.required],
-      zipcode: [this.data[id].address.zipcode, Validators.required],
-      phone: [this.data[id].phone, Validators.required],
-      website: [this.data[id].website, Validators.required],
+      street: [this.data[id].address.street] ,
+      suite: [this.data[id].address.suite],
+      city: [this.data[id].address.city],
+      zipcode: [this.data[id].address.zipcode],
+      phone: [this.data[id].phone],
+      website: [this.data[id].website],
     });
   }
 
@@ -87,24 +91,54 @@ export class TableComponent implements OnInit {
     for (let i = 0; i < this.data.length; i++) {
       control.push(this.initUserRow(i));
     }
-  }
+    console.log(this.data);
 
+  }
 
   editRow(rowId: number) {
     this.rowId = rowId;
+  }
 
+  addUser() {
+    this.showAddform = true;
+  }
+
+  saveRow(id) {
+    this.showModal = true;
+    this.submitted = true;
+    if (this.usersForm.invalid) {
+      return;
+    }
+    this.updatedUser = this.usersForm.value;
+
+    console.log(this.usersForm.get(`usersDetails`).value);
+    let index = findIndex(this.usersForm.get(`usersDetails`).value, (p: User) => {
+      return p.id === id;
+    });
+
+    this.dataService.updateUser(this.usersForm.get(`usersDetails`).value[index]).subscribe(
+      (res) => {
+        
+        this.usersForm.patchValue(this.usersForm.get(`usersDetails`).value[index]);
+        this.usersForm.patchValue({
+          user:'lachu@gmail.com',
+          username:['data']  
+          
+        });
+      },
+      (error: any) => console.error(error)
+    );
+    
+
+    this.rowId = "";
   }
 
   cancelRow(id) {
     this.rowId = "";
+    this.data[id] = this.data[id];
   }
 
-  // addUserRow(rowId: number) {
-  //   const usersArray =
-  //     <FormArray>this.usersForm.controls['usersDetails'];
-  //   usersArray.push(this.initUserRow(rowId));
-  // }
-
+  
   removeRow(rowId: number) {
     const usersArray = <FormArray>this.usersForm.controls['usersDetails'];
     if (usersArray.length > 0) {
@@ -116,7 +150,6 @@ export class TableComponent implements OnInit {
         (error: any) => console.error(error)
       );
     }
-
   }
 
 

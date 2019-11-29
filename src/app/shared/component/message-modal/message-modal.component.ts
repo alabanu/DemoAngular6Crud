@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-message-modal',
@@ -9,14 +9,14 @@ export class MessageModalComponent {
 
   constructor() { }
 
-  show: boolean = false;
-  public deploymentName: any;
+  @Input()
+  show: boolean;
 
-  showModal() {
+  discard() {
     this.show = !this.show;
   }
-  
-  fnAddDeploytment() {
-    alert(this.deploymentName);
+
+  save(){
+
   }
 }

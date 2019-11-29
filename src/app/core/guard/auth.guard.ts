@@ -10,10 +10,11 @@ export class AuthGuard implements CanActivate {
 
   canLoad(route: Route): boolean {
     let url: string = route.path;
-    console.log("canLoad//"+this.auth.isLoggedIn);
+
     if (this.auth.isLoggedIn) {
       return true;
     }
+    
     this.auth.setRedirectUrl(url);
     this.router.navigate(['/auth/login']);
     return false;

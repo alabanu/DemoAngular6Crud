@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/model/user';
 import { DataService } from 'src/app/core/service/data.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -11,12 +11,19 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 })
 export class UserListComponent implements OnInit {
   faUser = faUser;
-  user$:Observable<any>;
+  user$: Observable<any>;
   startIndex = 0;
-  endIndex = 5;
+  endIndex = 4;
   users: User[];
+  subscription: Subscription;
+  newUser: User;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {
+    this.subscription = this.dataService.newUserIn.subscribe(res => {
+      this.newUser = <User>res;
+      this.updateTable(this.newUser);
+    });
+  }
 
   ngOnInit() {
     this.load_data();
@@ -31,9 +38,15 @@ export class UserListComponent implements OnInit {
     );
   }
 
-  updateIndex(pageIndex){
-    this.startIndex = pageIndex * 5;
-    this.endIndex = this.startIndex + 5
+  updateTable(user: User) {
+    if (this.users) {
+      this.users.push(user);
+    }
+  }
+
+  updateIndex(pageIndex) {
+    this.startIndex = pageIndex * 4;
+    this.endIndex = this.startIndex + 4
   }
 
 }
