@@ -22,7 +22,6 @@ export class PaginationComponent implements OnInit {
   constructor() { }
 
   updateIndex(index) {
-    console.log("ININ//" + index);
     if (index > -1 && index < this.getArrayFromNumber().length) {
       this.selectedIndex = index;
       this.UpdateIndex.emit(index)
@@ -43,7 +42,6 @@ export class PaginationComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.noOfRecords, this.noOfRecordsPerPage);
   }
 
 }

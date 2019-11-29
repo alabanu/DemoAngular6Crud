@@ -9,6 +9,6 @@ import { AddFormComponent } from './add-form/add-form.component';
     CommonModule,
     TableRoutingModule
   ],
-  declarations: [AddFormComponent]
+  declarations: []
 })
 export class TableModule { }

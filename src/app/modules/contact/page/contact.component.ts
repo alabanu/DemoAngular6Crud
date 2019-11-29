@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/model/user';
 import { Address } from 'src/app/core/model/address';
+import { Geo } from 'src/app/core/model/geo';
 
 @Component({
   selector: 'app-contact',
@@ -10,6 +11,8 @@ import { Address } from 'src/app/core/model/address';
 export class ContactComponent implements OnInit {
   userme = new User;
   address = new Address;
+  geo = new Geo;
+  
   cardImage: string = "https://www.alloy-software.com/wp-content/uploads/2019/09/contacts-hero.svg";
 
   constructor() {
@@ -27,7 +30,10 @@ export class ContactComponent implements OnInit {
     this.address.city ="Athens";
     this.address.zipcode ="17343";
     this.userme.address = this.address;
-    this.userme.website ="alabanu@github";
+    this.geo.lat ="37.940600";
+    this.geo.lng ="23.738250";
+    this.userme.address.geo = this.geo;
+    this.userme.website = "alabanu@github";
   }
 
 }

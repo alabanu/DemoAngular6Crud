@@ -77,7 +77,7 @@ export class TableComponent implements OnInit {
       name: [this.data[id].name, Validators.required],
       username: [this.data[id].username, Validators.required],
       email: [this.data[id].email, Validators.required],
-      street: [this.data[id].address.street] ,
+      street: [this.data[id].address.street],
       suite: [this.data[id].address.suite],
       city: [this.data[id].address.city],
       zipcode: [this.data[id].address.zipcode],
@@ -86,12 +86,12 @@ export class TableComponent implements OnInit {
     });
   }
 
+
   createFormArray() {
     const control: FormArray = this.usersForm.get(`usersDetails`) as FormArray;
     for (let i = 0; i < this.data.length; i++) {
       control.push(this.initUserRow(i));
     }
-    console.log(this.data);
 
   }
 
@@ -116,19 +116,24 @@ export class TableComponent implements OnInit {
       return p.id === id;
     });
 
+
     this.dataService.updateUser(this.usersForm.get(`usersDetails`).value[index]).subscribe(
       (res) => {
-        
-        this.usersForm.patchValue(this.usersForm.get(`usersDetails`).value[index]);
-        this.usersForm.patchValue({
-          user:'lachu@gmail.com',
-          username:['data']  
-          
-        });
+        //update table quick&dirty
+        this.data[index].id = this.usersForm.get(`usersDetails`).value[index].id;
+        this.data[index].name = this.usersForm.get(`usersDetails`).value[index].name;
+        this.data[index].username = this.usersForm.get(`usersDetails`).value[index].username;
+        this.data[index].phone = this.usersForm.get(`usersDetails`).value[index].phone;
+        this.data[index].website = this.usersForm.get(`usersDetails`).value[index].website;
+        this.data[index].email = this.usersForm.get(`usersDetails`).value[index].email;
+        this.data[index].address.city = this.usersForm.get(`usersDetails`).value[index].city;
+        this.data[index].address.street = this.usersForm.get(`usersDetails`).value[index].street;
+        this.data[index].address.suite = this.usersForm.get(`usersDetails`).value[index].suite;
+        this.data[index].address.zipcode = this.usersForm.get(`usersDetails`).value[index].zipcode;
+
       },
       (error: any) => console.error(error)
     );
-    
 
     this.rowId = "";
   }
@@ -138,7 +143,7 @@ export class TableComponent implements OnInit {
     this.data[id] = this.data[id];
   }
 
-  
+
   removeRow(rowId: number) {
     const usersArray = <FormArray>this.usersForm.controls['usersDetails'];
     if (usersArray.length > 0) {

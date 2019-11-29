@@ -34,11 +34,9 @@ export class AddFormComponent implements OnInit {
 
   saveUser() {
     if (this.userForm) {
-      console.log(this.userForm.value);
       this.dataService.addUser(this.userForm.value).subscribe(
         (res) => {
           console.log("The user was succesfully created");
-          console.log(res);
         },
         (error: any) => console.error(error)
       );
@@ -46,7 +44,7 @@ export class AddFormComponent implements OnInit {
   }
 
   closeForm() {
-    this.showAddform = false;
+    // this.showAddform = false;
   }
 
 

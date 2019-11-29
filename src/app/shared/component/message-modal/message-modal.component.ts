@@ -10,13 +10,13 @@ export class MessageModalComponent {
   constructor() { }
 
   @Input()
-  show: boolean;
+  show: boolean = true;
 
   discard() {
     this.show = !this.show;
   }
 
   save(){
-
+    this.show = !this.show;
   }
 }

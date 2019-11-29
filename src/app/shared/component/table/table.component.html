@@ -32,7 +32,7 @@
               </td>
               <td *ngIf="item.id === rowId" class="col-xs-8 col-md-10">
                 <button type="button" class="btn btn-link centerbtn" title="Cancel row editing" data-toggle="modal"
-                  data-target="#confirmmodal" (click)="cancelRow(item.id)">
+                  data-target="#confirmModal" (click)="cancelRow(item.id)">
                   <fa-icon [icon]='faTimes'></fa-icon>
                 </button>
               </td>
@@ -61,7 +61,10 @@
               <input type="text" class="form-input" placeholder="Email" formControlName="email"></td>
             <td *ngIf="item.id !== rowId">{{ item.email }}</td>
             <td *ngIf="item.id === rowId">
-              <input type="text" class="form-input" placeholder="Street" formControlName="street"></td>
+              <!-- <div [formGroupName]="address"> -->
+                <input type="text" class="form-input" placeholder="Street" formControlName="street">
+              <!-- </div> -->
+            </td>
             <td *ngIf="item.id !== rowId">{{ item.address.street }}</td>
             <td *ngIf="item.id === rowId">
               <input type="text" class="form-input" placeholder="Suite" formControlName="suite"></td>
@@ -96,3 +99,5 @@
 <div id="collapse" class="collapse">
   <app-add-form [showAddform]="showAddform"></app-add-form>
 </div>
+
+<app-message-modal></app-message-modal>

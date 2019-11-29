@@ -21,7 +21,6 @@ export class UserDetailsComponent implements OnInit {
   }
 
   getUser(id) {
-    // this.selectedUser = this.customerList.filter(x=>x.id == id);  
     this.dataService.getUser(id).subscribe(
       (res) => {
         this.selectedUser = res;
